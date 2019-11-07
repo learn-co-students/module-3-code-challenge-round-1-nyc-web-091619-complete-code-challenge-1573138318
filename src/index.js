@@ -147,6 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'Content-Type': 'application/json'
       }
     })
+    .then(resp => resp.json())
+    .then(json => window.alert(`${json.message}`))
   }
 
   fetchImage()
