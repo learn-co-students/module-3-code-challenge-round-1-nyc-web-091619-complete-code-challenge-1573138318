@@ -47,21 +47,21 @@ A user of your app must be able to do the following things:
 
 ## Deliverables and How to Approach
 
-<!-- For this challenge it is important to work iteratively: one feature at a time, before moving on to the next. You should **prioritize making code that works over attempting all of the deliverables.** It is better to have a handfull of fully working features than 10 things that were attempted but do not work.
+For this challenge it is important to work iteratively: one feature at a time, before moving on to the next. You should **prioritize making code that works over attempting all of the deliverables.** It is better to have a handfull of fully working features than 10 things that were attempted but do not work.
 
-We have provided a series of prioritized steps to help you break down your approach this problem: -->
+We have provided a series of prioritized steps to help you break down your approach this problem:
 
 ## ✅ Step 1 - Get the Image Data
 
-<!-- When the page loads, you will need to make a request to the API to get the data about your picture. The API follows RESTful conventions, but *make sure you read the API documentation* to familiarize yourself with the models, their associations, and the available endpoints of the API. -->
+When the page loads, you will need to make a request to the API to get the data about your picture. The API follows RESTful conventions, but *make sure you read the API documentation* to familiarize yourself with the models, their associations, and the available endpoints of the API.
 
 #### API Docs
 
-#### ✅ Endpoint to show an individual Image
+####  Endpoint to show an individual Image
 
-<!-- Visit https://randopic.herokuapp.com/ in your web browser. The backend will assign you your very own `image_id`.  **THIS IS YOUR ASSIGNED IMAGE. This prevents your classmates from editing your images and vice versa**. -->
-<!-- 
-**Before you start anything else, locate the variable `imageId` in the `src/index.js`. Replace the value of the variable with your image id, and use it as the `/:id` parameter in your initial GET request.** This will be the image you'll be working with for this code challenge. -->
+Visit https://randopic.herokuapp.com/ in your web browser. The backend will assign you your very own `image_id`.  **THIS IS YOUR ASSIGNED IMAGE. This prevents your classmates from editing your images and vice versa**.
+
+**Before you start anything else, locate the variable `imageId` in the `src/index.js`. Replace the value of the variable with your image id, and use it as the `/:id` parameter in your initial GET request.** This will be the image you'll be working with for this code challenge.
 
 ```js
 GET 'https://randopic.herokuapp.com/images/:id'
@@ -85,29 +85,29 @@ Example Response:
   ]
 }
 ```
-<!-- 
-Use the data from the API response to change what's currently on the page (take a look at the already provided `index.html`). You will need to add/update: -->
+
+Use the data from the API response to change what's currently on the page (take a look at the already provided `index.html`). You will need to add/update:
 
 - ✅the image url
 - ✅the image name
 - ✅the number of likes
 - ✅any comments in an unordered list
-<!-- 
-(If you cannot get your fetch request to work correctly, you can  use the example response above to append content to the DOM and attempt the subsequent steps) -->
+
+(If you cannot get your fetch request to work correctly, you can  use the example response above to append content to the DOM and attempt the subsequent steps)
 
 ## ✅Step 2 - Like Feature (Frontend)
-<!-- 
+
 The next feature to approach is the functionality to add likes to a picture. First, get this working in the browser only without worrying about persistence.
 
 Clicking the 'Like' button should increase the number of likes shown on the page by one.
 
 A user can like the same picture multiple times.
 
---- -->
+---
 
 ## ✅Step 3 - Like Feature (Backend)
 
-<!-- This app will use what is called _optimistic rendering_. This means the DOM will be updated *before* the changes are added to the database. When a user clicks the 'Like' button we will immediately update the DOM. Next, your job is to make a POST request to persist the new Like in the backend database. -->
+This app will use what is called _optimistic rendering_. This means the DOM will be updated *before* the changes are added to the database. When a user clicks the 'Like' button we will immediately update the DOM. Next, your job is to make a POST request to persist the new Like in the backend database.
 
 #### API Docs
 
@@ -140,27 +140,27 @@ Example Response:
 }
 ```
 
-<!-- Since we are using optimistic rendering, you shouldn't have to do anything with the response.
+Since we are using optimistic rendering, you shouldn't have to do anything with the response.
 
-To test your code, make sure the number of likes increments when you click the like button. Then, refresh the page and make sure the increased number of likes remains the same. -->
+To test your code, make sure the number of likes increments when you click the like button. Then, refresh the page and make sure the increased number of likes remains the same.
 
 ---
 
 ## ✅ Step 4 - Comment Feature (Frontend)
 
-<!-- The next feature to approach is the functionality to add comments to a picture. First, get this working in the browser only, without worrying about persistence.
+The next feature to approach is the functionality to add comments to a picture. First, get this working in the browser only, without worrying about persistence.
 
-Filling out the input and clicking 'Submit' should append your new comment as an `<li>` to the comments unordered list element. You should also clear out the text in the comment input, so it's empty and ready for the next comment to be added. -->
+Filling out the input and clicking 'Submit' should append your new comment as an `<li>` to the comments unordered list element. You should also clear out the text in the comment input, so it's empty and ready for the next comment to be added.
 
 ## ✅ Step 5 - Comment Feature (Backend)
 
-<!-- As before, we need to persist the comment to the database, after optimistically rendering a comment.
+As before, we need to persist the comment to the database, after optimistically rendering a comment.
 
-#### API Docs -->
+#### API Docs
 
 #### Endpoint to create a Comment
 
-<!-- Similarly to before, this POST request's body should include the your assigned `imageId`. Remember associations? A `comment` `belongs_to` an `image`, so we need to send the `image_id` that the comment should be associated with: -->
+Similarly to before, this POST request's body should include the your assigned `imageId`. Remember associations? A `comment` `belongs_to` an `image`, so we need to send the `image_id` that the comment should be associated with:
 
 ```js
 POST 'https://randopic.herokuapp.com/comments'
@@ -171,34 +171,34 @@ Required keys in the body of the request:
   content: (insert comment content here)
 }
 
-// Required Headers
-// {
-//   'Accept': 'application/json',
-//   'Content-Type': 'application/json'
-// }
-// ```
+Required Headers
+{
+  'Accept': 'application/json',
+  'Content-Type': 'application/json'
+}
+```
 
 
-// ```json
-// Example Response (created comment):
-// {
-//   "id": 5,
-//   "content": "nice",
-//   "image_id": 1,
-//   "created_at": "2018-10-18T19:10:40.369Z",
-//   "updated_at": "2018-10-18T19:10:40.369Z"
-// }
+```json
+Example Response (created comment):
+{
+  "id": 5,
+  "content": "nice",
+  "image_id": 1,
+  "created_at": "2018-10-18T19:10:40.369Z",
+  "updated_at": "2018-10-18T19:10:40.369Z"
+}
 
 
 ```
-<!-- 
+
 Since we are using optimistic rendering, you shouldn't have to do anything with the response.
 
-To test your code you should be able to refresh the page and see any comments you added. -->
+To test your code you should be able to refresh the page and see any comments you added.
 
 ## BONUS - NOT REQUIRED
 
-## Step 6 - Delete a comment feature
+## ✅ Step 6 - Delete a comment feature
 
 This feature is not required, and you should only attempt if you have time.
 

@@ -65,14 +65,33 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     }).then (resp => resp.json())
       .then (data => {
+
+        //IF WE HAVE TO OPTIMISTICALLY UPDATE THE DOM
+        //WE NEED TO RETROACTIVELY GO ADD THE NEW COMMENT ID
     
         //get the last comment on the dom and add this ID to it
         let newComment = comments.lastChild
         newComment.dataset.comment_id = data.id
+
       })
   }
 
   function deleteClickHandler(e){
+    let thisComment = e.target.parentNode
+    let id = thisComment.dataset.comment_id
+
+    fetch(`${commentsURL}${id}`, {
+      method: "DELETE",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(resp => resp.json())
+      .then(data => {
+          if(data.message === 'Comment Successfully Destroyed'){
+            comments.removeChild(thisComment)
+          }
+      })
 
   }
 
