@@ -1,0 +1,12 @@
+image id 3908
+
+api
+https://randopic.herokuapp.com/images/3908
+
+
+    let name = e.target[0].value
+      let image = e.target[1].value
+      let obj = {
+      name: name,
+      image: image
+    }
