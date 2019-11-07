@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchCall3()
 
     function appendImage(object) {
+      console.log(object)
       let image = document.getElementById("image")
       let name = document.getElementById("name")
 
@@ -67,15 +68,16 @@ document.addEventListener('DOMContentLoaded', () => {
           spanElement.innerText = totalLikes
           
           
-          fetch(`https://randopic.herokuapp.com/likes/${id}`, {
-              method: 'PATCH',
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Accept': 'application/json'
-                  },
-                  body: JSON.stringify(likes: like_count) 
+          fetch(`https://randopic.herokuapp.com/likes/${id}`, 
+          {
+            method: 'PATCH', 
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }, 
+            body: JSON.stringify({likes: like_count})
           })
-    })
+      })
     } //end of appendlikes
 
     function appendComments(object){
@@ -95,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     imageCard.appendChild(commentForm)
 
     commentUl.appendChild(commentLi)
-  }
+  
       submitButton.addEventListener("click", function(){
 
         fetch(`https://randopic.herokuapp.com/comments/${id}`, {
@@ -106,7 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
           },
           body: JSON.stringify({ comments: comment.value })
       
-    })
-  }//end of comments
+        })
+      })//end of comments
+    }
 
 })//end of dom
