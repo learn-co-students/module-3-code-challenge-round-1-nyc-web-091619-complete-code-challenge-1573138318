@@ -22,10 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let form = document.getElementById("comment_form")
   let likeButton = document.getElementById("like_button")
 
-
-
-
-
   // FUNCTIONS =======================================================================>
   
 
@@ -173,4 +169,5 @@ document.addEventListener('DOMContentLoaded', () => {
   likeButton.addEventListener("click", likeClickHandler)
   form.addEventListener("submit", formSubmitHandler)
 
+ 
 })
