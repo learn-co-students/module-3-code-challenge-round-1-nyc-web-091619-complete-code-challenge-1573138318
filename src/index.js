@@ -9,66 +9,127 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const commentsURL = `https://randopic.herokuapp.com/comments/`
 
+fetch(imageURL)
+  .then(resp=>resp.json())
+  .then(data=>{renderData(data)})
 
-  fetch(imageURL)
-    .then(resp=>resp.json())
-    .then(data=>renderData(data))
+let title = document.getElementById('name')
+let image = document.getElementById('image')
+let likes = document.getElementById('likes')
+let commentForm = document.getElementById('comment_form')
+let commentInput = document.getElementById('comment_input')
+let button = document.getElementById('like_button')
+let commentSection = document.getElementById('comments')
 
-  function renderData(object){
-    console.log(object)
 
-    let likes = object.like_count
-    let likeSection = document.getElementById('likes')
-    likeSection.innerText = likes
-    
-    let comment = object.comments
-    let commentSection = document.getElementById('comments')
-    // commentSection.innerText = comment
-    comment.forEach((e)=>{
-      commentSection += e
-    })
-    
-    let image = object.url
-    let img = document.getElementById('image')
-    img.setAttribute('src', image)
-    
-    let name = object.name
-    let imageName = document.getElementById('name')
-    imageName.innerText = name 
-  }
-
-  
-  let likeButton = document.getElementById('like_button')
-
-  likeButton.addEventListener('click', function(e){
-    let likes = document.getElementById('likes')
-    likes.innerText++
+function renderData(data){
+  image.src = `${data.url}`
+  image.dataset.id = `${imageId}`
+  title.innerText = `${data.name}`
+  likes.innerText = `${data.like_count}`
+  data.comments.forEach(element => {
+    commentSection.innerHTML += `
+    <li data-id='${element.id}' > ${element.content} </li> <button type="button" id="delete_button">x</button>
+    `
   })
+}
 
-  let form = document.getElementById('comment_form')
-  let commentInput = document.getElementById('comment_input')
-  
-  form.addEventListener('submit', function(e){
-    e.preventDefault()
-    let commentSection = document.getElementById('comments')
-    commentSection.innerHTML += `<li> ${commentInput.value} </li>`
+function postComments(comment) {
+  fetch(commentsURL, {
+    method: 'POST',
+    body: JSON.stringify({
+      image_id: imageId,
+      content: comment
+    }),
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
   })
+    .then( resp => resp.json())
+    .then( json => { console.log(json.id) }
+)}
 
-  function likePersistence(likes)
-    return fetch(imageURL{
-      headers: {
-        'content-type': 'application/json'
-        'accept': 'application/json'
-      },
-      method: "POST"
-      body: JSON.stringify()
-    })
-      .then(resp=>resp.json())
-      .then(object=>{return object})
+// function appendToLi(argument){
 
+// }
+
+// function postToDom(argument){
+//   let li = document.createElement('li')
+//   let button = document.createElement('button')
+//   button.innerText = 'x'
+//   li.innerText = commentInput.value
+//   li.appendChild(button)
+//   li.dataset.id = argument
+//   commentSection.appendChild(li)
+// }
+
+commentForm.addEventListener('submit', (e)=>{
+  e.preventDefault()
+  console.log(e.target.value)
+  postComments(commentInput.value)
+
+  let li = document.createElement('li')
+  let button = document.createElement('button')
+  button.innerText = 'x'
+  li.innerText = commentInput.value
+  li.appendChild(button)
+  // li.dataset.id = data.id
+  commentSection.appendChild(li)
+
+  // commentSection.innerHTML += `<li> ${commentInput.value}  <button type="button" id="delete_button">x</button> </li>`
+  commentForm.reset()
 
 })
 
+// function getLast(){
+//   fetch(imageURL)
+//     .then(resp=>resp.json())
+//     .then(data=>console.log(data.comments))
+// }
+
+// getLast()
+
+document.addEventListener('click', (e)=>{
+  console.log('deleting comment')
+})
+
+
+button.addEventListener('click', (e)=>{
+  console.log('clicking')
+  likes.innerText++
+  postLikes(likes)
+})
+
+function postLikes(likes){
+  fetch(likeURL, {
+    method: 'POST',
+    body: JSON.stringify({
+      like_count: likes,
+      image_id: imageId
+    }),
+    headers: {
+      "content_type": "application/json",
+      "accept": "application/json"
+    }
+  }).then(resp => resp.json())
+    .then(data => console.log(data))
+}
+
+
+// function deleteComment(comment){
+//   fetch(
+
+})
+
+
+// created_at: "2019-11-07T15:12:14.173Z"
+// ​
+// id: 68413
+// ​
+// image_id: 3915
+// ​
+// updated_at: "2019-11-07T15:12:14.173Z"
 
 // get image data, fetch the image from the api
 // like feature // persist like feature

@@ -218,3 +218,64 @@ Example Response:
 ```
 
 _(Hint: To get the comment's id you may have to think about changing the way you handle the response received from creating a comment)_
+
+=============================================
+
+  fetch(imageURL)
+    .then(resp=>resp.json())
+    .then(data=>renderData(data))
+
+  function renderData(object){
+    console.log(object)
+
+    let likes = object.like_count
+    let likeSection = document.getElementById('likes')
+    likeSection.innerText = likes
+    
+    let comment = object.comments
+    let commentSection = document.getElementById('comments')
+    // commentSection.innerText = comment
+    comment.forEach((e)=>{
+      commentSection += e
+    })
+    
+    let image = object.url
+    let img = document.getElementById('image')
+    img.setAttribute('src', image)
+    
+    let name = object.name
+    let imageName = document.getElementById('name')
+    imageName.innerText = name 
+  }
+
+  
+  let likeButton = document.getElementById('like_button')
+
+  likeButton.addEventListener('click', function(e){
+    let likes = document.getElementById('likes')
+    likes.innerText++
+  })
+
+  let form = document.getElementById('comment_form')
+  let commentInput = document.getElementById('comment_input')
+  
+  form.addEventListener('submit', function(e){
+    e.preventDefault()
+    let commentSection = document.getElementById('comments')
+    commentSection.innerHTML += `<li> ${commentInput.value} </li>`
+  })
+
+  function likePersistence(likes)
+    return fetch(imageURL{
+      headers: {
+        'content-type': 'application/json'
+        'accept': 'application/json'
+      },
+      method: "POST"
+      body: JSON.stringify()
+    })
+      .then(resp=>resp.json())
+      .then(object=>{return object})
+
+
+})
